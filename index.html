@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Viewer</title>
+
+    <link href="css/kendo.mobile.all.min.css" rel="stylesheet" />
+	<link href="css/doc.viewer.css" rel="stylesheet" />
+	
+	<!--<script src="js/jquery-1.8.1.js"></script>-->
+	<script src="js/jquery-1.7.1.js"></script>
+	<!--<script src="js/jquery.min.js"></script>-->
+    <script src="js/kendo.all.min.js"></script>
+</head>
+<body>
+	<!-- Views -->
+	<div data-role="view" id="list_view" style="display:none;" data-title="Documents">
+		<header data-role="header">
+			<div data-role="navbar">
+				<span data-role="view-title"></span>
+			</div>
+		</header>
+		<ul data-role="listview" data-style="inset">
+			<li><a data-role="detail-button" href="#unsigned_view">Unsigned Docs</a></li>
+			<li><a data-role="detail-button" href="#urgent_view">Urgent Docs</a></li>
+			<li><a data-role="detail-button" href="#signed_view">Signed Docs</a></li>
+		</ul>
+	</div>
+	
+    <div data-role="view" id="unsigned_view" data-layout="doclist"  data-title="Unsigned Documents">
+		<ul data-role="listview" id="unsignedRegularDocs" data-style="inset"></ul>
+	</div>
+	    
+	<div data-role="view" id="urgent_view" data-layout="doclist"  data-title="Urgent Documents">
+		<ul data-role="listview" id="unsignedUrgentDocs" data-style="inset"></ul>
+	</div>
+	    
+	<div data-role="view" id="signed_view" data-layout="doclist"  data-title="Signed Documents">
+		<ul data-role="listview" id="signedDocs" data-style="inset"></ul>
+	</div>
+	
+	<div data-role="view" id="scrollview-home" data-layout="doclist" data-title="Preview">
+		<!--<img id="testimg" width="300" src=""/>-->
+		<div id="scrollview-container">
+			<div data-role="scrollview" id="pdf-container" data-page="0"></div>
+        </div>
+		<div data-role="modalview" id="modalview-fav" style="width: 80%; height: auto;">
+			<div data-role="header">
+				<div data-role="navbar">
+					<span>Favourites</span>
+				</div>
+			</div>
+			<div class="modalViewText"><span>Mark the document as favourite?</span></div>
+			<!--<div class="modalViewButtons">-->
+				<a data-click="closeModalViewFav" id="modalview-save-button" type="button" data-role="button" class="modalViewButtons">Mark</a>
+				<a data-click="closeModalViewFav" id="modalview-cancel-button" type="button" data-role="button" class="modalViewButtons">Cancel</a>
+			<!--</div>-->
+		</div>
+		<footer data-role="footer">
+			<div data-role="tabstrip">
+				<a href="#list_view" data-icon="home">Home</a>
+				<a data-role="button" data-rel="modalview" href="#modalview-fav" data-icon="favorites">Mark</a>				
+			</div> 
+		</footer>
+    </div>
+	
+	<!-- Layout -->
+    <div data-role="layout" data-id="doclist">
+    <header data-role="header">
+        <div data-role="navbar">
+			<a class="nav-button" data-align="left" data-role="backbutton" id="prev">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+	<footer data-role="footer">
+        <div data-role="tabstrip">
+            <a href="#list_view" data-icon="home">Home</a>        
+        </div> 
+    </footer>
+	</div>
+	
+	<!-- Starting KendoUI -->
+	<script src="js/doc.viewer.js"></script>
+	<script>
+		var app = new kendo.mobile.Application($(document.body),
+		{
+			transition:'slide',
+			initial: "list_view"
+		});
+	</script>
+</body>
+</html>
